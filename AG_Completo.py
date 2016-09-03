@@ -10,7 +10,6 @@ taxamutacao = 1
 geracao = 100
 elitismo = False
 normalizacao= False
-# tipo_cruzamento = 3 #1 Cruzamento de 1 ponto de corte ; 2 - Com 2 pontos de corte ; 3 - Uniforme
 
 def criarpop(tamanhopop):
     pop = []
@@ -36,22 +35,22 @@ def fitness(vetor_real):
         pop_avaliada.append(valor_z)
     return pop_avaliada
 
-def rankear(pop_atual, pop_avaliada):
-    popmatriz = np.column_stack((pop_atual, pop_avaliada))
-    matriz_rankeada = sorted(popmatriz, key=lambda popmatriz: popmatriz[50])
-    popatualrankeada = []
-    popavaliadarankeada = []
-    aux = []
-    for i in range(0,len(pop_atual)):
-        popavaliadarankeada.append(matriz_rankeada[i][50])
-        for j in range(0,tamanhoindividuo):
-            if matriz_rankeada[i][j] == 0.0:
-                aux.append(0)
-            else:
-                aux.append(1)
-        popatualrankeada.append(aux)
-        aux = []
-    return popatualrankeada
+# def rankear(pop_atual, pop_avaliada):
+#     popmatriz = np.column_stack((pop_atual, pop_avaliada))
+#     matriz_rankeada = sorted(popmatriz, key=lambda popmatriz: popmatriz[50])
+#     popatualrankeada = []
+#     popavaliadarankeada = []
+#     aux = []
+#     for i in range(0,len(pop_atual)):
+#         popavaliadarankeada.append(matriz_rankeada[i][50])
+#         for j in range(0,tamanhoindividuo):
+#             if matriz_rankeada[i][j] == 0.0:
+#                 aux.append(0)
+#             else:
+#                 aux.append(1)
+#         popatualrankeada.append(aux)
+#         aux = []
+#     return popatualrankeada
 
 def normalizacaolinear():
     avaliacao = []
@@ -61,7 +60,6 @@ def normalizacaolinear():
 
 def selecao(vetor_populacao, vetor_avaliado):
     soma_aptidao = 0
-
     for i in range(0, len(vetor_avaliado)):
         soma_aptidao += vetor_avaliado[i]
     selecionado = []
@@ -74,7 +72,6 @@ def selecao(vetor_populacao, vetor_avaliado):
         if acumulador >= r:
             selecionado = vetor_populacao[k]
             break
-
     return selecionado
 
 def cruzamento(populacao, populacaoavaliada, txcruzamento):
@@ -215,6 +212,7 @@ for i in range(0,10):
     print(i)
     for k in range(0,30):
         individuomaisapto = main(geracao, popatual, taxadecruzamento, taxamutacao)
+        print(individuomaisapto)
         # melhor_fitness_por_ensa.append(individuomaisapto)
         ensaios.append(individuomaisapto)
 # c = csv.writer(open('melhorindporensaio.csv', 'w')) 
@@ -249,7 +247,7 @@ aux26 = ensaios[26]
 aux27 = ensaios[27]
 aux28 = ensaios[28]
 aux29 = ensaios[29]
-print(aux28)
+
 media = media(aux0, aux1, aux2, aux3, aux4, aux5, aux6, aux7, aux8, aux9, aux10, aux11, aux12, aux13, aux14, aux15,
               aux16, aux17, aux18, aux19, aux20, aux21, aux22, aux23, aux24, aux25, aux26, aux27, aux28, aux29)
 
